@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import './styles.css';
 import Form from './containers/Form/Form';
@@ -23,19 +23,6 @@ export default function App() {
     console.log('Successfully submited. Data:', data);
   }, []);
 
-  const memoizedRules = useMemo(
-    () => ({
-      username: [required],
-      company: [required, minLength(3), maxLength(16)],
-      email: [required, email],
-      age: [required, number, minValue(18), maxValue(85)],
-      birthday: [required, date],
-      terms: [required],
-      plan: [required],
-    }),
-    [],
-  );
-
   return (
     <div className="App">
       <h1 className="text-center my-8 text-xl">Create Your Account</h1>
@@ -46,7 +33,7 @@ export default function App() {
               label="Name"
               name="username"
               onChange={onChange}
-              rules={memoizedRules.username}
+              rules={[required]}
               type="text"
               value={formState.username}
             />
@@ -54,7 +41,7 @@ export default function App() {
               label="Company Name"
               name="company"
               onChange={onChange}
-              rules={memoizedRules.company}
+              rules={[required, minLength(3), maxLength(16)]}
               type="text"
               value={formState.company}
             />
@@ -62,7 +49,7 @@ export default function App() {
               label="Email"
               name="email"
               onChange={onChange}
-              rules={memoizedRules.email}
+              rules={[required, email]}
               type="text"
               value={formState.email}
             />
@@ -70,7 +57,7 @@ export default function App() {
               label="Your age"
               name="age"
               onChange={onChange}
-              rules={memoizedRules.age}
+              rules={[required, number, minValue(18), maxValue(85)]}
               type="number"
               value={formState.age}
             />
@@ -78,7 +65,7 @@ export default function App() {
               label="Starting date"
               name="birthday"
               onChange={onChange}
-              rules={memoizedRules.birthday}
+              rules={[required, date]}
               type="date"
               value={formState.birthday}
             />
@@ -86,7 +73,7 @@ export default function App() {
               label="Do you agree?"
               name="terms"
               onChange={onChange}
-              rules={memoizedRules.terms}
+              rules={[required]}
               type="checkbox"
               value={formState.terms}
             />
@@ -94,7 +81,7 @@ export default function App() {
               label="Select your plan"
               name="plan"
               onChange={onChange}
-              rules={memoizedRules.plan}
+              rules={[required]}
               type="custom"
               value={formState.plan}
             >
