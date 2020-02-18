@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import useFormStateReducer from '../../hooks/useFormStateReducer';
 import useSubmitWithRules from '../../hooks/useSubmitWithRules';
 
-function Form({ children, id, onSubmit }) {
+function Form({
+  children, id, onSubmit, ...props
+}) {
   const [shouldSubmit, updateShouldSubmit] = useState(false);
   const [formState, updateFormState] = useFormStateReducer();
   const internalSubmit = useSubmitWithRules(updateFormState, updateShouldSubmit, formState);
@@ -25,7 +27,7 @@ function Form({ children, id, onSubmit }) {
   }, [shouldSubmit, updateShouldSubmit, formState, onSubmit]);
 
   return (
-    <form id={id} onSubmit={internalSubmit}>
+    <form id={id} onSubmit={internalSubmit} {...props}>
       {children({ onChange: updateFormState, formState })}
     </form>
   );

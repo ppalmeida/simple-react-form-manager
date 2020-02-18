@@ -39,7 +39,7 @@ export default function App() {
   return (
     <div className="App">
       <h1 className="text-center my-8 text-xl">Create Your Account</h1>
-      <Form id="form" onSubmit={onSubmit}>
+      <Form action="/account" id="create-account-form" onSubmit={onSubmit} type="POST">
         {({ onChange, formState }) => (
           <>
             <FormField
